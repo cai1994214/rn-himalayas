@@ -3,12 +3,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import Home from '@/pages/Home';
 import {LogBox} from 'react-native';
 
-export type TopTabParamList = {
-  Home: undefined;
-  Home1: undefined;
-  Home2: undefined;
-};
-const Tab = createMaterialTopTabNavigator<TopTabParamList>();
+const Tab = createMaterialTopTabNavigator();
 
 class HomeTabs extends React.Component {
   componentDidMount() {
@@ -19,6 +14,7 @@ class HomeTabs extends React.Component {
     return (
       <Tab.Navigator
         screenOptions={{
+          lazy: true,
           tabBarIndicatorStyle: {
             height: 4,
             width: 20,
@@ -30,26 +26,11 @@ class HomeTabs extends React.Component {
           tabBarItemStyle: {
             width: 80,
           },
-          lazy: true,
           tabBarActiveTintColor: '#f86442',
           tabBarInactiveTintColor: '#333',
         }}>
         <Tab.Screen
           name="Home"
-          component={Home}
-          options={{
-            tabBarLabel: '推荐',
-          }}
-        />
-        <Tab.Screen
-          name="Home1"
-          component={Home}
-          options={{
-            tabBarLabel: '推荐',
-          }}
-        />
-        <Tab.Screen
-          name="Home2"
           component={Home}
           options={{
             tabBarLabel: '推荐',

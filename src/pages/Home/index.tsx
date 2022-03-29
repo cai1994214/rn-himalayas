@@ -3,6 +3,7 @@ import {Text, View, Button} from 'react-native';
 import {RootStackNavigation} from '@/navigator/index';
 import {connect, ConnectedProps} from 'react-redux';
 import {RootState} from '@/modules/index';
+import Carousel from './Carousel';
 
 const mapStateToProps = ({home, loading}: RootState) => {
   //home是modules里的 loading是dva-loading插件内的
@@ -55,6 +56,8 @@ class Home extends React.Component<IProps> {
         <Button title="跳转到详情页" onPress={this.onPress} />
         <Button title="加" onPress={this.handleAdd} />
         <Button title="异步加" onPress={this.handleAsyncAdd} />
+        <Carousel />
+        <Text>你好</Text>
       </View>
     );
   }

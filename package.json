@@ -26,6 +26,7 @@
     "react-native-reanimated": "^1.7.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.2.0",
+    "react-native-snap-carousel": "^3.8.1",
     "react-native-svg": "^12.3.0",
     "react-native-tab-view": "^2.13.0",
     "react-redux": "^7.2.6"
@@ -36,6 +37,7 @@
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.66.15",
+    "@types/react-native-snap-carousel": "^3.8.1",
     "@types/react-test-renderer": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
