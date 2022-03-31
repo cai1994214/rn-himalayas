@@ -1,48 +1,72 @@
 import {Model, Effect} from 'dva-core-ts';
 import {Reducer} from 'redux';
+import axios from 'axios';
 
+const CAROUSEL_URL = '/carousel'; //轮播图接口
+
+const GUESS_URL = '/guess'; //猜你喜欢接口
+
+export interface IGuess {
+  id: string;
+  image: string;
+  title: string;
+}
+export interface ICarousel {
+  id: string;
+  image: string;
+  colors: [string, string];
+}
 interface HomeState {
-  num: number;
+  carousels: ICarousel[];
+  guess: IGuess[];
 }
 
 interface HomeModel extends Model {
   namespace: 'home';
   state: HomeState;
   reducers: {
-    add: Reducer<HomeState>;
+    setState: Reducer<HomeState>;
   };
   effects: {
-    asyncAdd: Effect;
+    featchCarousels: Effect;
+    featchGuess: Effect;
   };
 }
 
 const initialState: HomeState = {
-  num: 0,
+  carousels: [],
+  guess: [],
 };
 
-function delay(timeout: number) {
-  return new Promise(resolve => {
-    setTimeout(resolve, timeout);
-  });
-}
 const homeModel: HomeModel = {
   namespace: 'home',
   state: initialState,
   reducers: {
-    add(state = initialState, {payload}) {
+    setState(state = initialState, {payload}) {
       return {
         ...state,
-        num: state.num + payload.num,
+        ...payload,
       };
     },
   },
   effects: {
-    *asyncAdd({payload}, {call, put}) {
-      yield call(delay, 1000); //call 执行异步函数
+    *featchCarousels(_, {call, put}) {
+      const {data} = yield call(axios.get, CAROUSEL_URL);
       yield put({
-        //put执行同步函数
-        type: 'add',
-        payload,
+        type: 'setState',
+        payload: {
+          carousels: data,
+        },
+      });
+    },
+    *featchGuess(_, {call, put}) {
+      const {data} = yield call(axios.get, GUESS_URL);
+      console.log('猜你喜欢', data);
+      yield put({
+        type: 'setState',
+        payload: {
+          guess: data,
+        },
       });
     },
   },
